@@ -1,0 +1,25 @@
+<!--<p>{{elections | json}}</p>-->
+
+<hr />
+<table class="table">
+  <tr>
+    <th>שם הבחירות</th>
+    <th>זמן התחלה </th>
+    <th> זמן סיום</th>
+    <th>  האם פתוחה כעת</th>
+    <th>  מנהל יוצר</th>
+    <th>  ערוך </th>
+
+  </tr>
+
+  <tr *ngFor="let e of elections">
+    <td>{{e.nameOfTheElection}}</td>
+    <td>{{e.startTime}}</td>
+    <td>{{e.endTime}}</td>
+    <td>{{e.open}}</td>
+    <td>{{e.manegerUserId}}</td>
+    <td>
+      <button class="btn btn-primary" type="button" (click)="updateElection(e.id)">ערוך</button>
+    </td>
+  </tr>
+</table>

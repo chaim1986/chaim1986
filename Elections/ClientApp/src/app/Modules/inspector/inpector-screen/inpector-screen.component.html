@@ -1,0 +1,43 @@
+<!--<p>{{faults | json }}</p>-->
+<div>
+    <div>
+        <!--<button class="btn btn-primary " (click)="openDialog()">open dialog</button>
+        <button class="btn btn-primary " (click)="openModal()">open modal</button>-->
+
+
+        <!--<button type="button" (click)="showDialog()" icon="pi pi-info-circle" label="Show">dialog</button>-->
+
+
+
+    </div>
+
+    <p-dialog header="Title" [(visible)]="display" [blockScroll]="true" [resizable]="false" [maximizable]="true" [modal]="true" [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '50vw'}">
+        <app-inspector-faults2 [user]="user" [userId]="userId" [fault]="fault" ></app-inspector-faults2>
+    </p-dialog>
+
+    <div *ngFor="let a of faults">
+
+        <h4>{{a.electionName}}</h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>מצב התלונה</th>
+                    <th>תיאור קצר</th>
+                    <th>הכנס לתלונה</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let f of a.area.faults">
+
+                    <td>{{f.open}}</td>
+                    <td>{{f.despriction}}</td>
+                    <td><button class="btn btn-primary" (click)="test1(f)">הכנס לתלונה</button></td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+    </div>
+</div>

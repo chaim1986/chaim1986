@@ -1,0 +1,32 @@
+<!--<p>{{elections | json}}</p>-->
+
+
+
+
+<form #f="ngForm" (ngSubmit)="submit()">
+
+  <div class="form-group">
+    <label for="elections">בחירות פתוחות להצבעה</label>
+    <select id="elections" class="form-control" (change)="getOptionsToVote()" [(ngModel)]="voterId" name="electionId">
+      <option value="" selected="selected">בחר בחירות מהרשימה</option>
+      <option *ngFor="let e of filterOpenElections()" value="{{e.id}}">{{e.election.nameOfTheElection}}</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="optionsToVote">אפשרויות הצבעה</label>
+    <select id="optionsToVote" class="form-control" [(ngModel)]="vote.OptionToVoteIdNumber" name="OptionToVoteIdNumber">
+      <option value="" selected="selected"></option>
+      <option *ngFor="let o of optionsToVote" value="{{o.id}}">{{o.candidateOrPartyName}}</option>
+    </select>
+  </div>
+
+
+
+
+
+
+
+
+<button class="btn btn-primary ">Save</button>
+</form>

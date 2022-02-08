@@ -1,0 +1,109 @@
+<p>{{election | json}}</p>
+
+
+<form #f="ngForm" (ngSubmit)="submit()">
+  <div class="form-group">
+    <label for="nameOfTheElection">שם הבחירות</label>
+    <input id="nameOfTheElection" type="text" class="form-control" [(ngModel)]="election.nameOfTheElection" name="nameOfTheElection" required #name="ngModel" />
+  </div>
+  <!--<div class="alert alert-danger" *ngIf="firstName.touched && !firstName.valid">you must enter a firstName </div>-->
+
+  <div class="form-group">
+    <label for="startTime">זמן התחלה</label>
+    <input id="startTime" type="datetime-local" class="form-control" [(ngModel)]="election.startTime" name="startTime" required #name="ngModel" />
+  </div>
+  <!--<div class="alert alert-danger" *ngIf="firstName.touched && !firstName.valid">you must enter a firstName </div>--> <div class="form-group">
+
+    <label for="endTime">זמן סיום</label>
+    <input id="endTime" type="datetime-local" class="form-control" [(ngModel)]="election.endTime" name="endTime" required #name="ngModel" />
+  </div>
+  <!--<div class="alert alert-danger" *ngIf="firstName.touched && !firstName.valid">you must enter a firstName </div>-->
+
+  <p>  האם ההצבעה ניתנת לשינוי בתוך הזמן</p>
+
+  <label for="ischangeable" class="radio-inline">
+    <input type="radio" name="ischangeable" id="ischangeable" [value]="true" [(ngModel)]="election.ischangeable" /> כן
+
+  </label>
+
+
+  <label for="isnotchangeable" class="radio-inline">
+    <input type="radio" name="ischangeable" id="isnotchangeable" [value]="false" [(ngModel)]="election.ischangeable" /> לא
+
+  </label>
+  <hr />
+
+
+  <button type="button" (click)="showDialogOfOptions()" icon="pi pi-info-circle" label="Show">הוסף אפשרויות הצבעה</button>
+  <hr />
+
+  <p-dialog header="הוספת אפשרות" [(visible)]="displayOption" [blockScroll]="true" [resizable]="false" [maximizable]="true" [modal]="true" [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '50vw'}">
+    <button type="button" class="btn btn-primary" (click)="addOption()">הוסף אפשרות חדשה </button>  <hr /><hr />
+    <div *ngFor="let option of election.optionToVotes ; index as i">
+      <hr />
+      <button type="button" (click)="remove(i)">הסר אפשרות זו להצבעה</button>
+      <hr />
+      <label for="candidateOrPartyName{{i}}">שם המפלגה</label>
+
+      <!--<div>{{option.id || 'not id'}}</div>-->
+      <input id="candidateOrPartyName{{i}}" [readonly]="!!option.id" type="text" class="form-control" [(ngModel)]="option.candidateOrPartyName" name="candidateOrPartyName{{i}}" required #name="ngModel" />
+
+
+    </div>
+    <hr />
+    <button type="button" class="btn btn-primary" (click)="closeDialog()">שמור</button>
+  </p-dialog>
+
+  <button type="button" (click)="showDialogOfArea()" icon="pi pi-info-circle" label="Show">הוסף  איזורי הצבעה</button>
+  <hr />
+
+  <p-dialog header="הוספת איזור" [(visible)]="displayArea" [blockScroll]="true" [resizable]="false" [maximizable]="true" [modal]="true" [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '50vw'}">
+    <button type="button" class="btn btn-primary" (click)="addArea()">הוסף איזור חדש </button>
+    <div *ngFor="let option of election.areas ; index as i">
+      <hr />
+      <button type="button" (click)="removeArea(i)"> הסר איזור זה</button>
+      <hr />
+      <label for="nameOfArea{{i}}">שם איזור</label>
+      <hr />
+
+      <!--<div>{{option.id || 'not id'}}</div>-->
+      <input id="nameOfArea{{i}}" [readonly]="!!option.id" type="text" class="form-control" [(ngModel)]="option.nameOfArea" name="nameOfArea{{i}}" required #name="ngModel" />
+
+
+    </div>
+    <hr />
+    <button type="button" class="btn btn-primary" (click)="closeDialog()">שמור</button>
+  </p-dialog>
+
+  <hr />
+  
+  <div class="flex">
+    <div class="form-group">
+      <label for="file" class="btn btn-primary"> הוסף קובץ אקסל של רשימת מצביעים</label>
+      <input type="file"
+             id="file"
+             style="visibility:hidden"
+             (change)="addListOfVoters($event)" />
+
+
+    </div>
+    <button type="button" class="btn btn-primary" (click)="showlistOfVoters()">הצג רשימת מצביעים</button>
+
+  </div>
+  <p-dialog [header]="election.nameOfTheElection" [(visible)]="displaylist" [blockScroll]="true" [resizable]="false" [maximizable]="true" [modal]="true" [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '50vw'}">
+
+    <table class="table">
+      <tr *ngFor="let v of election.voters">
+        <td>{{v.phoneNumber}}</td>
+      </tr>
+    </table>
+    <hr />
+    <button type="button" class="btn btn-primary" (click)="closeDialog()">סגור</button>
+    <hr />
+  </p-dialog>
+   
+    <hr /><hr />
+    <button type="submit" class="btn btn-primary ">{{electionId? 'עדכן' : 'צור'}}</button>
+    <!--<button class="btn btn-danger " type="button" (click)="delete()">Delete</button>-->
+</form>
+

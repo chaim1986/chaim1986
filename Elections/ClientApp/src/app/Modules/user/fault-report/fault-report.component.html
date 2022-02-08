@@ -1,0 +1,32 @@
+<p> {{fullReport | json}} </p>
+<p> {{electionId | json}} </p>
+
+
+<table class="table" id="elections">
+  <thead>
+    <tr>
+      <th>Already voted?</th>
+      <th>nameOfTheElection</th>
+      <th>startTime</th>
+      <th>endTime</th>
+      <th>isOpen</th>
+      <th> Fault reporting </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let e of elections">
+      <td>{{e.alreadyVoted}}</td>
+      <td>{{e.election.nameOfTheElection}}</td>
+      <td>{{e.election.startTime}}</td>
+      <td>{{e.election.endTime}}</td>
+      <td>{{e.election.isOpen}}</td>
+      <td>  <button class="btn btn-danger " type="button" (click)="makeReport(e.election.id)">Fault reporting</button> </td>
+    </tr>
+  </tbody>
+</table>
+<div *ngIf="electionId">
+  <ckeditor [editor]="Editor" [(ngModel)]="fullReport.despriction"></ckeditor>
+
+  <button class="btn btn-primary" (click)="report()">Report</button>
+</div>

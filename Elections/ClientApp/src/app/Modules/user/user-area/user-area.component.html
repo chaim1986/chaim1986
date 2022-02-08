@@ -1,0 +1,33 @@
+<header>
+  <!--<p> {{elections[0] | json}} </p>-->
+
+  <h1>user area</h1> 
+
+  <h3>{{user.firstName +" " + user.lastName}}</h3>
+  <div *ngIf="isInspector">
+    <p>הנך מפקח באיזור {{user.city}}</p>
+    <button  (click)="inspector()"> היכנס למסך פיקוח</button>
+  </div>
+
+</header>
+
+<table class="table" id="users">
+  <thead>
+    <tr>
+      <th>שם הבחירות</th>
+      <th>האם הצביע?</th>
+      <th>זמן התחלה</th>
+      <th>זמן סיום</th>
+      <th>האם פתוחה</th>
+    </tr>
+  </thead>  
+  <tbody>
+    <tr *ngFor="let e of elections">
+      <td>{{e.election.nameOfTheElection}}</td>
+      <td>{{e.alreadyVoted}}</td>
+      <td>{{e.election.startTime}}</td>
+      <td>{{e.election.endTime}}</td>
+      <td>{{e.election.isOpen}}</td>
+    </tr>
+      </tbody>
+   </table>

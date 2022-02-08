@@ -1,0 +1,24 @@
+<ng-container *ngIf="fault">
+
+  <p>מגיש התלונה</p>
+  <p>{{user.firstName}} {{user.lastName}}</p>
+  <h4>תיאור התלונה</h4>
+<p >{{fault.despriction}}</p>
+
+ <h4 *ngIf="fault.replies.length">תגובות המפקחים</h4>
+ <div *ngFor="let r of fault.replies ">
+
+   <!--<p> תגובה מ: getInspector(r.UserInspectorId) </p>-->
+   <p >{{r.content}}</p>
+
+
+ </div>
+</ng-container>
+
+<button class="btn btn-primary" (click)="showEditor()">{{visible? 'סגור' : 'כתוב תגובה'}}</button>
+
+<div *ngIf="visible">
+
+  <ckeditor [editor]="Editor" [(ngModel)]="replay.content"></ckeditor>
+  <button class="btn" (click)="insertReplay()">שלח</button>
+</div>

@@ -1,0 +1,48 @@
+<p> {{userDetails | json}} </p>
+<p> {{userId | json}} </p>
+
+<form #f="ngForm" (ngSubmit)="submit()">
+    <div class="form-group">
+        <label for="firstName">firstName</label>
+        <input id="firstName" type="text" class="form-control" [(ngModel)]="userDetails.firstName" name="firstName" required #name="ngModel" />
+    </div>
+    <!--<div class="alert alert-danger" *ngIf="firstName.touched && !firstName.valid">you must enter a firstName </div>-->
+
+    <div class="form-group">
+        <label for="lastName">lastName</label>
+        <input id="lastName" type="text" class="form-control" [(ngModel)]="userDetails.lastName" name="lastName" required #lastName="ngModel" />
+    </div>
+    <!--<div class="alert alert-danger" *ngIf="lastName.touched && !lastName.valid">you must enter a lastName </div>-->
+
+    <div class="form-group">
+        <label for="phoneNumber">phoneNumber</label>
+        <input id="phoneNumber" type="text" class="form-control" [(ngModel)]="userDetails.phoneNumber" name="phoneNumber" />
+    </div>
+
+    <div class="form-group">
+        <label for="emailAdress">emailAdress</label>
+        <input id="emailAdress" type="text" class="form-control" [(ngModel)]="userDetails.emailAdress" name="emailAdress" required #emailAdress="ngModel" />
+    </div>
+    <!--<div class="alert alert-danger" *ngIf="emailAdress.touched && !emailAdress.valid">you must enter a emailAdress </div>-->
+
+    <div class="form-group">
+        <label for="city">city</label>
+        <input id="city" type="text" class="form-control" [(ngModel)]="userDetails.city" name="city" required #city="ngModel" />
+    </div>
+    <!--<div class="alert alert-danger" *ngIf="city.touched && !city.valid">you must enter a city </div>-->
+
+    <div class="form-group">
+        <label for="street">street</label>
+        <input id="street" type="text" class="form-control" [(ngModel)]="userDetails.street" name="street" required #street="ngModel" />
+    </div>
+    <!--<div class="alert alert-danger" *ngIf="street.touched && !street.valid">you must enter a city </div>-->
+
+    <div class="form-group">
+        <label for="password">password</label>
+        <input id="password" type="text" class="form-control" [(ngModel)]="userDetails.password" name="password" required #password="ngModel" />
+    </div>
+    <!--<div class="alert alert-danger" *ngIf="password.touched && !password.valid">you must enter a password </div>-->
+
+    <button class="btn btn-primary ">Update</button>
+    <button class="btn btn-danger " type="button" (click)="delete()">Delete</button>
+</form>

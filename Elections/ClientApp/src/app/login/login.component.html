@@ -1,0 +1,23 @@
+<div class="alert alert-danger" *ngIf="loginFaild">שם משתמש או סיסמה אינם נכונים</div>
+<form ngSubnit="register()">
+
+  <div class="form-group">
+    <label for="email">נא הכנס כתובת אימייל</label>
+    <input id="email" [(ngModel)]="u.emailAdress" #email type="email">
+
+  </div>
+
+  <div class="form-group">
+    <label for="password">נא הכנס סיסמה</label>
+    <input id="password" [(ngModel)]="u.password" #email type="password">
+
+  </div>
+
+
+  <button type="submit" (click)="login()">log in</button>
+
+
+</form>
+<hr />
+<label for="register">עוד אין לך חשבון? הירשם!</label>
+<button id="register" >הירשם</button>
